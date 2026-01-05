@@ -1,0 +1,21 @@
+ssh.host=hostNameOrIP
+ssh.port=22
+ssh.user=user
+ssh.password=password
+
+# Plusieurs tunnels
+tunnel.1.localPort=3307
+tunnel.1.remoteHost=127.0.0.1
+tunnel.1.remotePort=3306
+
+tunnel.2.localPort=9001
+tunnel.2.remoteHost=127.0.0.1
+tunnel.2.remotePort=9001
+
+tunnel.3.localPort=9050
+tunnel.3.remoteHost=127.0.0.1
+tunnel.3.remotePort=9050
+
+# Intervalle de verification en secondes
+check.interval=10
+reconnect.delay=5
