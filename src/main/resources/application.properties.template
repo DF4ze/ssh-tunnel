@@ -1,21 +1,32 @@
-ssh.host=hostNameOrIP
+# ─── Serveur (API REST locale) ────────────────────────────────────────────────
+server.address=127.0.0.1
+server.port=8765
+
+# ─── Connexion SSH ─────────────────────────────────────────────────────────────
+ssh.host=YOUR_SERVER_HOST_OR_IP
 ssh.port=22
-ssh.user=user
-ssh.password=password
+ssh.user=YOUR_SSH_USER
+ssh.password=YOUR_SSH_PASSWORD
 
-# Plusieurs tunnels
-tunnel.1.localPort=3307
-tunnel.1.remoteHost=127.0.0.1
-tunnel.1.remotePort=3306
+ssh.check-interval=10
 
-tunnel.2.localPort=9001
-tunnel.2.remoteHost=127.0.0.1
-tunnel.2.remotePort=9001
+# ─── Tunnels SSH (port forwarding local → remote) ──────────────────────────────
+ssh.tunnels[0].local-port=3307
+ssh.tunnels[0].remote-host=127.0.0.1
+ssh.tunnels[0].remote-port=3306
 
-tunnel.3.localPort=9050
-tunnel.3.remoteHost=127.0.0.1
-tunnel.3.remotePort=9050
+# Ajouter d'autres tunnels selon les besoins :
+# ssh.tunnels[1].local-port=9001
+# ssh.tunnels[1].remote-host=127.0.0.1
+# ssh.tunnels[1].remote-port=9001
 
-# Intervalle de verification en secondes
-check.interval=10
-reconnect.delay=5
+# ─── Gateway - Services gérables via l'API ─────────────────────────────────────
+gateway.sudo-password=YOUR_SUDO_PASSWORD
+
+# Whitelist des services séparés par des virgules
+gateway.managed-services=tor,mariadb
+
+# ─── Logging ──────────────────────────────────────────────────────────────────
+logging.level.root=WARN
+logging.level.fr.ses10doigts=INFO
+spring.main.banner-mode=off

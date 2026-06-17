@@ -1,25 +1,8 @@
 package fr.ses10doigts;
 
-public class TunnelConfig {
-    private final int localPort;
-    private final String remoteHost;
-    private final int remotePort;
-
-    public TunnelConfig(int localPort, String remoteHost, int remotePort) {
-        this.localPort = localPort;
-        this.remoteHost = remoteHost;
-        this.remotePort = remotePort;
-    }
-
-    public int getLocalPort() {
-        return localPort;
-    }
-
-    public String getRemoteHost() {
-        return remoteHost;
-    }
-
-    public int getRemotePort() {
-        return remotePort;
-    }
-}
+/**
+ * @deprecated Remplacé par fr.ses10doigts.model.TunnelConfig.
+ * Fichier conservé pour ne pas casser les références git — peut être supprimé manuellement.
+ */
+@Deprecated
+class TunnelConfig {}

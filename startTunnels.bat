@@ -1,2 +1,10 @@
 @echo off
-java -Dconfig.file="D:\Installs\Ssh-tunnel-deamon\application.properties" -jar "D:\Installs\Ssh-tunnel-deamon\ssh-tunnel-deamon-1.0.0.jar"
+cd /d "D:\Installs\Ssh-tunnel"
+
+:loop
+java -jar "D:\Installs\Ssh-tunnel\ssh-tunnel-gateway.jar"
+
+if exist "D:\Installs\Ssh-tunnel\restart.trigger" (
+    del "D:\Installs\Ssh-tunnel\restart.trigger"
+    goto loop
+)
