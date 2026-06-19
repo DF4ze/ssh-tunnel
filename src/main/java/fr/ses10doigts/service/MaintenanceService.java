@@ -39,24 +39,7 @@ public class MaintenanceService {
         }
     }
 
-    /**
-     * systemctl status <service>
-     */
-    public String getServiceStatus(String serviceName) throws Exception {
-        assertServiceAllowed(serviceName);
-        return sshService.executeCommand("systemctl status " + serviceName + " --no-pager");
-    }
 
-    /**
-     * sudo systemctl restart <service>
-     */
-    public String restartService(String serviceName) throws Exception {
-        assertServiceAllowed(serviceName);
-        return sshService.executeCommand(
-            "systemctl restart " + serviceName,
-            gatewayProps.getSudoPassword()
-        );
-    }
 
     /**
      * journalctl -n 100 -u <service> --no-pager

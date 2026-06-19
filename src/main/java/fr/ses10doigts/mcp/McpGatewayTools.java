@@ -69,15 +69,6 @@ public class McpGatewayTools {
         return "Reconnexion SSH demandée. La connexion sera rétablie dans quelques secondes.";
     }
 
-    @Tool(description = """
-            Déconnecte manuellement la session SSH.
-            La reconnexion automatique est suspendue jusqu'au prochain appel à reconnect().
-            """)
-    public String disconnect() {
-        sshService.disconnect();
-        return "Déconnexion SSH effectuée. La reconnexion automatique est suspendue.";
-    }
-
     // ─── Services systemd ─────────────────────────────────────────────────────
 
     @Tool(description = """
@@ -89,36 +80,6 @@ public class McpGatewayTools {
             return maintenanceService.getAllServicesStatus();
         } catch (Exception e) {
             return "Erreur : " + e.getMessage();
-        }
-    }
-
-    @Tool(description = """
-            Exécute `systemctl status <service>` sur le serveur distant.
-            Retourne les détails complets : état, PID, uptime, dernières lignes de log.
-            Le service doit être dans la liste des services gérables (whitelist).
-            """)
-    public String getServiceStatus(
-            @ToolParam(description = "Nom du service systemd (ex: tor, mariadb)") String serviceName) {
-        try {
-            return maintenanceService.getServiceStatus(serviceName);
-        } catch (Exception e) {
-            return "Erreur : " + e.getMessage();
-        }
-    }
-
-    @Tool(description = """
-            Exécute `sudo systemctl restart <service>` sur le serveur distant.
-            ATTENTION : redémarre effectivement le service, ce qui peut causer une interruption brève.
-            Le service doit être dans la liste des services gérables (whitelist).
-            Toujours demander confirmation à l'utilisateur avant d'appeler cet outil.
-            """)
-    public String restartService(
-            @ToolParam(description = "Nom du service systemd à redémarrer (ex: tor, mariadb)") String serviceName) {
-        try {
-            String result = maintenanceService.restartService(serviceName);
-            return "✅ Service " + serviceName + " redémarré." + (result.isBlank() ? "" : "\n" + result);
-        } catch (Exception e) {
-            return "❌ Erreur : " + e.getMessage();
         }
     }
 
@@ -201,7 +162,7 @@ public class McpGatewayTools {
             Exemples utiles : df -h, free -m, ps aux | grep java, uptime, uname -a,
             ss -tlnp, cat /var/log/syslog | tail -50, etc.
             Ne pas utiliser pour des commandes déjà couvertes par les autres outils
-            (préférer getServiceStatus/restartService pour les services systemd).
+            (préférer getAllServicesStatus/getServiceLogs pour les services systemd).
             """)
     public String execCommand(
             @ToolParam(description = "Commande shell à exécuter sur le serveur distant") String command) {

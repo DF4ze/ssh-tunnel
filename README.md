@@ -34,8 +34,6 @@ D:\Installs\Ssh-tunnel\
 | Tool | Description |
 |------|-------------|
 | `getAllServicesStatus()` | État de tous les services whitelist en une passe |
-| `getServiceStatus(name)` | `systemctl status` d'un service |
-| `restartService(name)` | `sudo systemctl restart` d'un service |
 | `getServiceLogs(name, lines)` | `journalctl` — N dernières lignes |
 
 Les services autorisés sont définis dans `application.properties` (`gateway.managed-services`).

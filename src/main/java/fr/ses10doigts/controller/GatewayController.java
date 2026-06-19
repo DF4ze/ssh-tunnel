@@ -105,38 +105,6 @@ public class GatewayController {
     }
 
     /**
-     * GET /api/service/{name}/status
-     * systemctl status <service>
-     */
-    @GetMapping("/service/{name}/status")
-    public ResponseEntity<Map<String, Object>> getServiceStatus(@PathVariable String name) {
-        try {
-            String output = maintenanceService.getServiceStatus(name);
-            return ResponseEntity.ok(Map.of("service", name, "result", output));
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
-        } catch (Exception e) {
-            return error(e.getMessage());
-        }
-    }
-
-    /**
-     * POST /api/service/{name}/restart
-     * sudo systemctl restart <service>
-     */
-    @PostMapping("/service/{name}/restart")
-    public ResponseEntity<Map<String, Object>> restartService(@PathVariable String name) {
-        try {
-            String output = maintenanceService.restartService(name);
-            return ResponseEntity.ok(Map.of("service", name, "result", output.isEmpty() ? "OK" : output));
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
-        } catch (Exception e) {
-            return error(e.getMessage());
-        }
-    }
-
-    /**
      * GET /api/service/{name}/logs?lines=100
      * journalctl -n <lines> -u <service>
      */

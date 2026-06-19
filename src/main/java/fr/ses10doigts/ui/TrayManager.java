@@ -94,7 +94,7 @@ public class TrayManager {
             logWindow.log(dateNow() + " : Restart Tor demandé...");
             new Thread(() -> {
                 try {
-                    String result = maintenanceService.restartService("tor");
+                    String result = sshService.executeCommand("systemctl restart tor", gatewayProperties.getSudoPassword());
                     logWindow.log(dateNow() + " : Tor restarted. " + (result.isEmpty() ? "OK" : result));
                 } catch (Exception ex) {
                     logWindow.log(dateNow() + " : Erreur restart Tor : " + ex.getMessage());
